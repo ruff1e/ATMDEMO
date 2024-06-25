@@ -1,2 +1,2 @@
 # ATMDEMO
-My first java project
+My first java project.
