@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -5,12 +6,18 @@ public class Main {
 
         System.out.println("Welcome to the ATM");
 
-        Account[] accounts = {
+
+        List<Account> accounts = List.of(
                 new Account(1000, "Emre", 1000),
-                new Account(1001, "Josh", 100),
-                new Account(1002, "Umut", 123123),
-                new Account(1003, "Dillon", 11111),
-        };
+                new Account(1001, "Josh", 2000),
+                new Account(1002, "Umut", 3000),
+                new Account(1003, "Diln", 4000),
+                new Account(1004, "Babacim", 999999)
+        );
+
+
+
+
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your account ID: ");
@@ -36,7 +43,7 @@ public class Main {
             WithdrawService withdrawService = new WithdrawService(account);
             DepositService depositService = new DepositService(account);
             CheckService checkService = new CheckService(account);
-            LoanServices loanApply = new LoanServices(account);
+            LoanServices loanServices = new LoanServices(account);
 
             switch (option) {
                 case 1:
@@ -56,7 +63,7 @@ public class Main {
                     System.out.println("You are eligible for a loan up to " + account.getLoanMax() + " dollars.");
                     System.out.println("How much would you like to apply for?");
                     int loanAmount = scanner.nextInt();
-                    loanApply.loan(loanAmount);
+                    loanServices.loan(loanAmount);
                     break;
                 case 5:
                     System.exit(0);
@@ -69,12 +76,14 @@ public class Main {
         }
     }
 
-    private static Account findAccountById(Account[] accounts, int accountId) {
-        for (Account account : accounts) {
-            if (account.getId() == accountId) {
-                return account;
-            }
-        }
-        return null;
+    private static Account findAccountById(List<Account> accounts, int accountId) {
+
+        Account acc = accounts.stream()
+                .filter(x -> x.getId() == accountId)
+                .findFirst()
+                .orElse(null);
+
+
+        return acc;
     }
 }
