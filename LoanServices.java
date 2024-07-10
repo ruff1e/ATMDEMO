@@ -19,7 +19,7 @@ public class LoanServices {
             System.out.println("Your new balance is: " + balance);
         }
         else {
-            System.out.println("you can't apply for that much broke bitch.");
+            System.out.println("you can't apply for that much.");
         }
 
         return accountInfo;
